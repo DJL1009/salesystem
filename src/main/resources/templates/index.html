@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>Sale System</title>
+    <link th:href="@{css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div th:replace="/header :: head"></div>
+<div class="g-doc">
+    <div class="m-tab m-tab-fw m-tab-simple f-cb">
+        <div class="tab">
+            <ul>
+                <li class="z-sel" ><a href="/">所有商品</a></li>
+            </ul>
+        </div>
+    </div>
+    <div th:if="${not #lists.isEmpty(commodities)}">
+        <div class="n-plist">
+            <ul class="f-cb" id="plist">
+                <li th:each="commodity:${commodities}" th:id="'p-'+${commodity.id}">
+                    <a th:href="'/show?id='+${commodity.id}" class="link">
+                        <div class="img"><img th:src="${commodity.image}" th:alt="${commodity.title}"></div>
+                        <h3 th:text="${commodity.title}"></h3>
+                        <div class="price"><span class="v-unit">¥</span><span class="v-value" th:text="${commodity.price}"></span></div>
+                    </a>
+                    <span class="u-btn u-btn-normal u-btn-xs del" th:data-del="${commodity.id}" sec:authorize="hasRole('ROLE_SELLER')">删除</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div th:replace="/footer :: foot"></div>
+<script th:src="@{js/global.js}" type="text/javascript"></script>
+<script th:src="@{js/pageIndex.js}" type="text/javascript"></script>
+</body>
+</html>

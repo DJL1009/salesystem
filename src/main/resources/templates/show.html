@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>Sale System</title>
+    <link th:href="@{css/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div th:replace="/header :: head"></div>
+<div class="g-doc">
+    <div class="n-show f-cb" id="showContent">
+        <div class="img"><img th:src="${commodity.image}" th:alt="${commodity.title}" ></div>
+        <div class="cnt">
+            <h2 th:text="${commodity.title}"></h2>
+            <p class="summary" th:text="${commodity.summary}"></p>
+            <div class="price">
+                <span class="v-unit">¥</span><span class="v-value" th:text="${commodity.price}"></span>
+            </div>
+            <div class="num">购买数量：<span id="plusNum" class="lessNum"><a>-</a></span><span class="totalNum" id="allNum"></span><span id="addNum" class="moreNum"><a>+</a></span></div>
+            <div class="oprt f-cb" sec:authorize="hasRole('ROLE_SELLER')">
+                <a th:href="'/edit?id='+${commodity.id}" class="u-btn u-btn-primary">编 辑</a>
+            </div>
+        </div>
+    </div>
+    <div class="m-tab m-tab-fw m-tab-simple f-cb">
+        <h2>详细信息</h2>
+    </div>
+    <div class="n-detail" th:text="${commodity.detail}">
+    </div>
+</div>
+<div th:replace="/footer :: foot"></div>
+<script th:src="@{js/global.js}" type="text/javascript"></script>
+<script th:src="@{js/pageShow.js}" type="text/javascript"></script>
+</body>
+</html>

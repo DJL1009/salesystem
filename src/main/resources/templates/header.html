@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<!-- 定义公共部分：head -->
+<div th:fragment="head">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!--<meta name="_csrf_header" th:content="${_csrf.parameterName}"/>-->
+    <div class="n-support">请使用Chrome、Safari等webkit内核的浏览器！</div>
+    <div class="n-head">
+        <!-- 匿名用户 -->
+        <div class="g-doc f-cb" sec:authorize="!isAuthenticated()">
+            <div class="user">
+                请<a href="/login">[登录]</a>
+            </div>
+            <ul class="nav">
+                <li><a href="/">首页</a></li>
+            </ul>
+        </div>
+        <!-- 已登录 -->
+        <div class="g-doc f-cb" sec:authorize="isAuthenticated()">
+            <div class="user">
+                <span sec:authorize="hasRole('ROLE_SELLER')">卖家</span>
+                <span sec:authorize="hasRole('ROLE_CUSTOMER')">买家</span>
+                你好，<span class="name" sec:authentication="name"></span>!
+                <!-- logout必须使用post触发，此处使用表单提交会附带添加csrf token -->
+                <form id="logout" method="post" th:action="@{/logout}">
+                    <input type="hidden" name="name" value="" />
+                    <a onclick="document.getElementById('logout').submit();">【退出】</a>
+                </form>
+            </div>
+            <ul class="nav" sec:authorize="hasRole('ROLE_SELLER')">
+                <li><a href="/">首页</a></li>
+                <li><a href="/publish">发布</a></li>
+            </ul>
+            <ul class="nav" sec:authorize="hasRole('ROLE_CUSTOMER')">
+                <li><a href="/">首页</a></li>
+                <li><a href="/account">账务</a></li>
+                <li><a href="/settleAccount">购物车</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
