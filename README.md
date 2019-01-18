@@ -43,5 +43,6 @@
 |商品ID|commodity_id|int||否||外键|
 |商品单价|price|double||否|||
 |商品数量|quantity|int||否|||
-
+|时间|time|timestamp||否|||
+|已完成|is_done|boolean||否|false||
 

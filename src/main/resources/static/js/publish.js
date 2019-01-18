@@ -66,21 +66,24 @@
 				}else{
                     var file = uploadInput.files[0];
                     var imgForm = new FormData();
+                    var token = document.querySelector("meta[name='_csrf']").getAttribute("content");
                     imgForm.append('file', file, file.name);
                     //使用'multipart/form-data'，将文件以二进制形式上传，这样可以实现多种类型的文件上传
                     imgForm.enctype = "multipart/form-data";
                     var xhr = new XMLHttpRequest();
                     xhr.open("post", "/api/upload", true);
+                    xhr.setRequestHeader("X-CSRF-TOKEN",token); //请求头添加CSRF token
                     xhr.onload = function () {
                         if (xhr.status === 200) {
-                            //var o = JSON.parse(xhr.responseText);
-                            imageUrl = xhr.responseText;
-                            // console.log(o);
-                            // console.log(o.result);
-                            // imageUrl = o && o.result;
-                            image.value = imageUrl; //重置表单数据
-                            imgpre.src = imageUrl;  //更新预览图片路径并显示
-                            alert("文件上传成功");
+                            var o = JSON.parse(xhr.responseText);
+                            if(o.state === 0){
+                                imageUrl = o && o.data;
+                                image.value = imageUrl; //重置表单数据
+                                imgpre.src = imageUrl;  //更新预览图片路径并显示
+                                alert("文件上传成功");
+							}else{
+                            	alert('Error:'+o.message);
+							}
                         } else {
                             alert('An error occurred!');
                         }

@@ -65,14 +65,14 @@
             if(xhr.readyState === 4){
                 var status = xhr.status;
                 if(status >= 200 && status < 300 || status === 304){
-                	var response = xhr.responseText;
-                	if(status === 200){
-                		options.success && options.success(response);
+                	var json = JSON.parse(xhr.responseText);
+                	if(json && json.state === 0){
+                		options.success && options.success(json.data);
                 	}else{
-                		options.error && options.error(status);
+                		options.error && options.error(json.message);
                 	}
                 }else{
-                    options.error && options.error('请求失败');
+                    options.error && options.error('请求失败:');
                 }
             }
         };

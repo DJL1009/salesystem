@@ -1,8 +1,10 @@
 package com.djl.shop.controller;
 
+import com.djl.shop.common.JsonResult;
 import com.djl.shop.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,26 +28,40 @@ public class RequestController {
     @Autowired
     CommodityService commodityService;
 
-    @RequestMapping("/upload")
+    @PostMapping("/upload")
     @Secured("ROLE_SELLER")
-    public String upload(@RequestParam("file") MultipartFile img){
-
-        String imgName = img.getOriginalFilename();
-        File dest = new File(imgPath+imgName);
-        try {
+    public JsonResult upload(@RequestParam("file") MultipartFile img){
+        JsonResult result;
+        try{
+            String imgName = img.getOriginalFilename();
+            File dest = new File(imgPath+imgName);
             img.transferTo(dest);
-        } catch (IOException e) {
+            result = new JsonResult((Object)imgName);
+        }catch (IOException e){
             e.printStackTrace();
+            result = new JsonResult(e);
         }
-        return imgName;
+        return result;
     }
 
     @PostMapping("/delete")
     @Secured("ROLE_SELLER")
-    public void delete(HttpServletRequest request){
-        long id= Long.valueOf(request.getParameter("id"));
-//        commodityService.remove(id);
-        System.out.println("delete=====>"+id);
+    public JsonResult delete(HttpServletRequest request){
+        JsonResult result;
+        try{
+            long id= Long.valueOf(request.getParameter("id"));
+            //commodityService.remove(id);
+            commodityService.findById(id);
+            result = new JsonResult((Object)"delete success");
+        }catch (EmptyResultDataAccessException exception){
+            result = new JsonResult(exception);
+        }
+        return result;
+    }
 
+    @RequestMapping("/json")
+    public JsonResult json(){
+        JsonResult json = new JsonResult(commodityService.findById(1));
+        return json;
     }
 }

@@ -27,12 +27,16 @@
 						data:{
 							id:id,
 						},
-						success:function(response){
+						success:function(json){
 							this.delItemNode(id);
 							loading.result('删除成功');
 						}.bind(this),
 						fail:function () {
 							loading.result('删除失败');
+                        }.bind(this),
+						error:function (e) {
+							console.log(e);
+							loading.result('删除失败')
                         }.bind(this)
 					});
 				}.bind(this)
