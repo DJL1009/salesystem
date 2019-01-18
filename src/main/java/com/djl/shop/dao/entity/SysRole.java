@@ -9,13 +9,13 @@ import javax.persistence.Id;
 public class SysRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long roleId;
     private String name;
-    public void setId(long id){
-        this.id = id;
+    public void setRoleId(long roleId){
+        this.roleId = roleId;
     }
-    public long getId(){
-        return this.id;
+    public long getRoleId(){
+        return this.roleId;
     }
     public void setName(String name){
         this.name = name;

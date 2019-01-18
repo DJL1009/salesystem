@@ -15,7 +15,8 @@
         <!--图片显示-->
         <span class="imgpre"><img src="" alt="" id="imgpre"></span>
         <!--商品信息表单-->
-        <form class="m-form m-form-ht" id="form" method="post" action="/publishSubmit" onsubmit="return false;" autocomplete="off">
+        <!-- 表单action必须使用th:action才能自动添加csrf表单项，否则会报403错误 -->
+        <form class="m-form m-form-ht" id="form" method="post" th:action="@{/publishSubmit}" onsubmit="return false;" autocomplete="off">
             <div class="fmitem">
                 <label class="fmlab">商品：</label>
                 <div class="fmipt">

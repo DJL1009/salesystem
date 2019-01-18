@@ -14,7 +14,7 @@ public class SysUser implements UserDetails {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long userId;
     private String username;
     private String password;
     //配置用户和角色的多对多关系
@@ -22,8 +22,8 @@ public class SysUser implements UserDetails {
     private List<SysRole> roles;
 
     //getter&setter
-    public void setId(long id){ this.id = id; }
-    public long getId(){ return this.id; }
+    public void setUserId(long userId){ this.userId = userId; }
+    public long getUserId(){ return this.userId; }
     public void setUsername(String username){ this.username = username; }
     public String getUsername(){ return this.username; }
     public void setPassword(String password){ this.password = password; }

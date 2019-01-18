@@ -48,7 +48,7 @@ public class PageController {
     @RequestMapping(value = "/editSubmit")
     public String editSubmit(Commodity commodity,Model model){
         commodityService.save(commodity);
-        model.addAttribute("id",commodity.getId());
+        model.addAttribute("id",commodity.getCommodityId());
         return "publishSubmit";
     }
 
@@ -61,7 +61,7 @@ public class PageController {
     @RequestMapping(value = "/publishSubmit")
     public String publishSubmit(Commodity commodity,Model model){
         commodityService.save(commodity);
-        model.addAttribute("id",commodity.getId());
+        model.addAttribute("id",commodity.getCommodityId());
         return "publishSubmit";
     }
 

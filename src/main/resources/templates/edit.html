@@ -12,11 +12,12 @@
         <h2>内容编辑</h2>
     </div>
     <div class="n-public">
-        <form class="m-form m-form-ht" id="form" method="post" th:action="'/editSubmit?id='+${commodity.id}" onsubmit="return false;" autocomplete="off">
+        <!-- 表单action必须使用th:action才能自动添加csrf表单项，否则会报403错误 -->
+        <form class="m-form m-form-ht" id="form" method="post" th:action="@{/editSubmit}" onsubmit="return false;" autocomplete="off">
             <div class="fmitem">
                 <label class="fmlab">标题：</label>
                 <div class="fmipt">
-                    <input type="hidden" name="id" value="8"/>
+                    <input type="hidden" name="commodityId" th:value="${commodity.commodityId}"/>
                     <input class="u-ipt ipt" name="title" th:value="${commodity.title}" placeholder="2-80字符"/>
                 </div>
             </div>

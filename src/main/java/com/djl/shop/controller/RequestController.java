@@ -1,11 +1,13 @@
 package com.djl.shop.controller;
 
 import com.djl.shop.common.JsonResult;
+import com.djl.shop.dao.entity.Commodity;
 import com.djl.shop.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,8 +52,7 @@ public class RequestController {
         JsonResult result;
         try{
             long id= Long.valueOf(request.getParameter("id"));
-            //commodityService.remove(id);
-            commodityService.findById(id);
+            commodityService.remove(id);
             result = new JsonResult((Object)"delete success");
         }catch (EmptyResultDataAccessException exception){
             result = new JsonResult(exception);
@@ -59,9 +60,4 @@ public class RequestController {
         return result;
     }
 
-    @RequestMapping("/json")
-    public JsonResult json(){
-        JsonResult json = new JsonResult(commodityService.findById(1));
-        return json;
-    }
 }

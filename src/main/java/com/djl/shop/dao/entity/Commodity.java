@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Commodity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;//不能使用封装类型
+    private long commodityId;//不能使用封装类型
 
     private String title;
     private double price;
@@ -29,9 +29,9 @@ public class Commodity {
         this.summary =summary;
         this.detail = detail;
     }
-    public long getId(){ return this.id; }
-    public void setId(long id){
-        this.id = id;
+    public long getCommodityId(){ return this.commodityId; }
+    public void setCommodityId(long commodityId){
+        this.commodityId = commodityId;
     }
     public String getTitle(){ return this.title; }
     public void setTitle(String title){

@@ -19,7 +19,7 @@
             </div>
             <div class="num">购买数量：<span id="plusNum" class="lessNum"><a>-</a></span><span class="totalNum" id="allNum"></span><span id="addNum" class="moreNum"><a>+</a></span></div>
             <div class="oprt f-cb" sec:authorize="hasRole('ROLE_SELLER')">
-                <a th:href="'/edit?id='+${commodity.id}" class="u-btn u-btn-primary">编 辑</a>
+                <a th:href="'/edit?id='+${commodity.commodityId}" class="u-btn u-btn-primary">编 辑</a>
             </div>
         </div>
     </div>

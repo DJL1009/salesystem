@@ -29,12 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
-//    @Autowired
-//    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.userDetailsService(sysUserService());
-//    }
-
-
     //配置user-detail服务
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
