@@ -52,7 +52,7 @@ public class RequestController {
         JsonResult result;
         try{
             long id= Long.valueOf(request.getParameter("id"));
-            commodityService.remove(id);
+            commodityService.delete(id);
             result = new JsonResult((Object)"delete success");
         }catch (EmptyResultDataAccessException exception){
             result = new JsonResult(exception);

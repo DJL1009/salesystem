@@ -1,6 +1,7 @@
 package com.djl.shop.dao.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 /***
@@ -10,7 +11,7 @@ import javax.persistence.*;
 public class Commodity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long commodityId;//不能使用封装类型
+    private long id;//不能使用封装类型
 
     private String title;
     private double price;
@@ -18,20 +19,14 @@ public class Commodity {
     private String summary;
     private String detail;
     private int quantity;
-    public Commodity(){
-        super();
-    }
-    public Commodity(String title,double price,String image,String summary,String detail){
-        super();
-        this.title = title;
-        this.price = price;
-        this.image = image;
-        this.summary =summary;
-        this.detail = detail;
-    }
-    public long getCommodityId(){ return this.commodityId; }
-    public void setCommodityId(long commodityId){
-        this.commodityId = commodityId;
+
+    //商品相对于订单是被控方，被控方需要写mappedby，其值为主控方中引用的外键对象的名称
+    @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE},mappedBy = "commodity")
+    private List<SysOrder> sysOrders;
+
+    public long getId(){ return this.id; }
+    public void setId(long id){
+        this.id = id;
     }
     public String getTitle(){ return this.title; }
     public void setTitle(String title){
@@ -63,6 +58,8 @@ public class Commodity {
     }
     public int getQuantity(){ return this.quantity;}
     public void setQuantity(int quantity){ this.quantity = quantity; }
+    public List<SysOrder> getSysOrders() { return this.sysOrders; }
+    public void setOrders(List<SysOrder> sysOrders) { this.sysOrders = sysOrders; }
 
     @Override
     public String toString(){

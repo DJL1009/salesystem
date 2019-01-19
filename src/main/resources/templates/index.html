@@ -21,13 +21,13 @@
     <div th:if="${not #lists.isEmpty(commodities)}">
         <div class="n-plist">
             <ul class="f-cb" id="plist">
-                <li th:each="commodity:${commodities}" th:id="'p-'+${commodity.commodityId}">
-                    <a th:href="'/show?id='+${commodity.commodityId}" class="link">
+                <li th:each="commodity:${commodities}" th:id="'p-'+${commodity.id}">
+                    <a th:href="'/show?id='+${commodity.id}" class="link">
                         <div class="img"><img th:src="${commodity.image}" th:alt="${commodity.title}"></div>
                         <h3 th:text="${commodity.title}"></h3>
                         <div class="price"><span class="v-unit">¥</span><span class="v-value" th:text="${commodity.price}"></span></div>
                     </a>
-                    <span class="u-btn u-btn-normal u-btn-xs del" th:data-del="${commodity.commodityId}" sec:authorize="hasRole('ROLE_SELLER')">删除</span>
+                    <span class="u-btn u-btn-normal u-btn-xs del" th:data-del="${commodity.id}" sec:authorize="hasRole('ROLE_SELLER')">删除</span>
                 </li>
             </ul>
         </div>

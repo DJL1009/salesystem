@@ -41,6 +41,7 @@
 			item.num = parseInt(item.num) + parseInt(num);
 		},
 		getCookie:function(name){
+			console.log(document.cookie);
 			var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
 			result && (result = JSON.parse(result[1]));
 			return result;

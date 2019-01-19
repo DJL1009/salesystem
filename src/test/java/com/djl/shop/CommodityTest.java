@@ -26,6 +26,6 @@ public class CommodityTest {
 
     @Test
     public void deleteCommodity(){
-        commodityService.remove(10L);
+        commodityService.delete(10L);
     }
 }

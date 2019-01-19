@@ -36,11 +36,7 @@ public class CommodityService {
     }
 
     @CacheEvict(value = "commodity")
-    public void remove(Long id){
+    public void delete(Long id){
         commodityRepo.deleteById(id);
-    }
-
-    public void update(Commodity commodity){
-
     }
 }
