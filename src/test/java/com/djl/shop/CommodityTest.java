@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CommodityTest {
@@ -27,5 +29,13 @@ public class CommodityTest {
     @Test
     public void deleteCommodity(){
         commodityService.delete(10L);
+    }
+
+    @Test
+    public void commodityIsSelled(){
+        List<Commodity> commodities = commodityService.selled();
+        Commodity c = commodityService.findById(9);
+        System.out.println(commodities);
+        System.out.println("================"+commodities.contains(c));
     }
 }

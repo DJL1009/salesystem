@@ -36,7 +36,7 @@ public class SysUser implements UserDetails {
     public void setPassword(String password){ this.password = password; }
     public String getPassword(){ return this.password; }
     public void setRoles(List<SysRole> roles){ this.roles = roles; }
-    private List<SysRole> getRoles(){ return this.roles; }
+    public List<SysRole> getRoles(){ return this.roles; }
     public List<SysOrder> getSysOrders() { return this.sysOrders; }
     public void setOrders(List<SysOrder> sysOrders) { this.sysOrders = sysOrders; }
 

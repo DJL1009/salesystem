@@ -18,7 +18,8 @@ public class Commodity {
     private String image;
     private String summary;
     private String detail;
-    private int quantity;
+    private int quantity; //总量
+    private int selled;   //已售
 
     //商品相对于订单是被控方，被控方需要写mappedby，其值为主控方中引用的外键对象的名称
     @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE},mappedBy = "commodity")
@@ -58,11 +59,26 @@ public class Commodity {
     }
     public int getQuantity(){ return this.quantity;}
     public void setQuantity(int quantity){ this.quantity = quantity; }
+    public int getSelled() { return this.selled; }
+    public void setSelled(int selled) { this.selled = selled; }
     public List<SysOrder> getSysOrders() { return this.sysOrders; }
     public void setOrders(List<SysOrder> sysOrders) { this.sysOrders = sysOrders; }
 
     @Override
+    public boolean equals(Object o){
+        if(o == null)
+            return false;
+        else {
+            if(o instanceof Commodity){
+                return ((Commodity)o).id == this.id;
+            }
+        }
+        return false;
+    }
+    @Override
     public String toString(){
         return this.getTitle()+":    ¥"+this.getPrice();
     }
+
+
 }

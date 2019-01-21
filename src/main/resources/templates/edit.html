@@ -59,7 +59,7 @@
             <div class="fmitem">
                 <label class="fmlab">库存量：</label>
                 <div class="fmipt">
-                    <input class="u-ipt price" name="quantity" th:value="${commodity.quantity}"/>
+                    <input class="u-ipt price" name="quantity" th:value="${commodity.quantity - commodity.selled}"/>
                 </div>
             </div>
             <div class="fmitem fmitem-nolab fmitem-btn">

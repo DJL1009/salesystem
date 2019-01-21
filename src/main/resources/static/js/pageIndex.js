@@ -51,4 +51,9 @@
 		}
 	};
 	page.init();
+
+	var purchased = document.getElementsByName("purchased");
+	purchased.forEach(function (item) { item.hidden });
+
 })(window,document);
+

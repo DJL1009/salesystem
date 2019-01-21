@@ -27,7 +27,7 @@ a:hover{color:#000;}
 body{padding-bottom:50px;}
 .g-doc{width:970px;margin: 0 auto;}
 .g-doc th.td{text-align:center;}
-#newTable th,td{text-align:center;}
+#newTable th,td{text-align:left;}
 #thisId{display:none;}
 #act-btn{margin-top:100px;margin-left:300px;}
 #act-btn button{margin-left:100px;}
@@ -188,6 +188,7 @@ select.u-ipt{width:auto;padding:0;line-height:1;}
 .n-plist .price{padding-bottom:15px;}
 .n-plist .had{position:absolute;top:0;left:0;height:0;width:0;border-style:solid;border-width:22px;border-color:#aaa transparent transparent #aaa;border-top-left-radius:2px;}
 .n-plist .had b{position: absolute;top:-12px;left:-25px;width:40px;text-align:center;white-space: nowrap;line-height:14px;font-size:12px;transform:rotate(-45deg);color:#eee;}
+
 .n-plist .del{position:absolute;right:15px;bottom:15px;opacity:0;transition:opacity 0.2s;}
 .n-plist li:hover .del{opacity:1;}
 
@@ -207,8 +208,9 @@ select.u-ipt{width:auto;padding:0;line-height:1;}
 
 .n-table img{display:block;width:60px;height:60px;border-radius:2px;}
 .n-table col.img{width: 100px;}
-.n-table col.time{width:200px;}
-.n-table col.price{width:140px;}
+.n-table col.time{width: 200px; }
+.n-table col.num{width: 140px; }
+.n-table col.price{width: 140px; }
 .n-table .total{text-align: right;}
 
 .n-public{position:relative;}

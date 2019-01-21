@@ -48,12 +48,14 @@
 		},
 		setCookie:function(name,value){
 			var cookie = [name, '=', JSON.stringify(value)].join('');
+			console.log("before add================"+cookie);
 			document.cookie = cookie;
+			console.log("after add==============="+document.cookie);
 		},
 		deleteCookie:function(name) {
 			  if (this.getCookie(name))
 			    this.setCookie(name, "", -1);
-		},
+		}
 	};
 
     var ajax = function(options) {

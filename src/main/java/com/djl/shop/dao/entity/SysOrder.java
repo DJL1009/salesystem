@@ -61,6 +61,6 @@ public class SysOrder {
 
     @Override
     public String toString(){
-        return "Order"+this.id+":"+this.sysUser.getUsername()+" buys "+this.quantity+"  "+this.commodity.getTitle();
+        return "Order"+this.id+":"+this.sysUser.getUsername()+" buys "+this.quantity+"  "+this.commodity.getTitle()+" "+this.getTime();
     }
 }

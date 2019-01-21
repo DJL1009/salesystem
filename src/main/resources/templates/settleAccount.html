@@ -13,13 +13,17 @@
     <div class="m-tab m-tab-fw m-tab-simple f-cb" >
         <h2>已添加到购物车的内容</h2>
     </div>
+
+    <div id="nullProducts"></div>
     <table id="newTable" class="m-table m-table-row n-table g-b3">
     </table>
+
     <div id="act-btn"><button class="u-btn u-btn-primary" id="back">退出</button>
-        <button class="u-btn u-btn-primary" id="Account">购买</button></div>
+        <button class="u-btn u-btn-primary" id="Account">结算</button></div>
 </div>
 <div th:replace="/footer :: foot"></div>
 <script th:src="@{js/global.js}" type="text/javascript"></script>
 <script th:src="@{js/settleAccount.js}" type="text/javascript"></script>
 </body>
 </html>
+
