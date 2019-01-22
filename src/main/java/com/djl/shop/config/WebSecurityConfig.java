@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeRequests()
                 // 所有用户均可访问的资源
-                .antMatchers("/css/**", "/js/**","/images/**","/index","/","/show","/login").permitAll()
+                .antMatchers("/css/**", "/js/**","/images/**","/img/**","/index","/","/show","/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()                               //定义登录方式为form表单登录

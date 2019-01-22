@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -41,7 +40,7 @@ public class RequestController {
     public JsonResult upload(@RequestParam("file") MultipartFile img){
         JsonResult result;
         try{
-            String imgName = img.getOriginalFilename();
+            String imgName = "img/"+img.getOriginalFilename();
             File dest = new File(imgPath+imgName);
             img.transferTo(dest);
             result = new JsonResult((Object)imgName);
