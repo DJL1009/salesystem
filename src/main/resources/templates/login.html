@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{css/style.css}"/>
 </head>
 <body>
-<div th:replace="/header :: head"></div>
+<div th:replace="common/header :: head"></div>
 <form class="m-form m-form-ht n-login" id="loginForm" th:action="@{/login}" method='POST' onsubmit="return checkForm()">
     <div class="fmitem">
         <label class="fmlab">用户名：</label>
@@ -27,7 +27,7 @@
         </div>
     </div>
 </form>
-<div th:replace="/footer :: foot"></div>
+<div th:replace="common/footer :: foot"></div>
 <script th:src="@{js/global.js}" type="text/javascript"></script>
 <script th:src="@{js/pageLogin.js}" type="text/javascript"></script>
 <script th:src="@{js/md5.js}" type="text/javascript"></script>

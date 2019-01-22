@@ -6,13 +6,13 @@
     <link th:href="@{css/style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div th:replace="/header :: head"></div>
+<div th:replace="common/header :: head"></div>
 <div class="g-doc">
     <div class="n-result">
         <h3>发布成功！</h3>
         <p><a th:href="'/show?id='+${id}">[查看内容]</a><a href="/">[返回首页]</a></p>
     </div>
 </div>
-<div th:replace="/footer :: foot"></div>
+<div th:replace="common/footer :: foot"></div>
 </body>
 </html>

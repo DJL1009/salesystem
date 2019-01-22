@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface OrderRepo extends JpaRepository<SysOrder, Long> {
 
+    List<SysOrder> findBySysUserOrderByTimeDesc(SysUser user);
     List<SysOrder> findBySysUser(SysUser user);
     List<SysOrder> findByCommodity(Commodity commodity);
     List<SysOrder> findBySysUserAndCommodity(SysUser user,Commodity commodity);

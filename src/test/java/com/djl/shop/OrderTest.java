@@ -1,6 +1,7 @@
 package com.djl.shop;
 
 import com.djl.shop.dao.CommodityRepo;
+import com.djl.shop.dao.OrderRepo;
 import com.djl.shop.dao.UserRepo;
 import com.djl.shop.dao.entity.Commodity;
 import com.djl.shop.dao.entity.SysOrder;
@@ -24,6 +25,8 @@ public class OrderTest {
     CommodityRepo commodityRepo;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    OrderRepo orderRepo;
 
     @Test
     public void addOrder(){
@@ -40,9 +43,11 @@ public class OrderTest {
     @Test
     public void orderList(){
         SysUser user = userRepo.getOne(2L);
-        Commodity commodity = commodityRepo.getOne(2L);
-        List<SysOrder> orders = orderService.findByUandC(user,commodity);
-        System.out.println(orders);
+        System.out.println(orderRepo.findBySysUserOrderByTimeDesc(user));
+
+//        Commodity commodity = commodityRepo.getOne(2L);
+//        List<SysOrder> orders = orderService.findByUandC(user,commodity);
+//        System.out.println(orders);
     }
 
     @Test

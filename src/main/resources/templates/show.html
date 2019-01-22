@@ -7,7 +7,7 @@
     <link th:href="@{css/style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div th:replace="/header :: head"></div>
+<div th:replace="common/header :: head"></div>
 <div class="g-doc">
     <div class="n-show f-cb" id="showContent">
         <div class="img"><img th:src="${commodity.image}" th:alt="${commodity.title}" ></div>
@@ -71,7 +71,7 @@
     <div class="n-detail" th:text="${commodity.detail}">
     </div>
 </div>
-<div th:replace="/footer :: foot"></div>
+<div th:replace="common/footer :: foot"></div>
 <script th:src="@{js/global.js}" type="text/javascript"></script>
 <script th:src="@{js/pageShow.js}" type="text/javascript"></script>
 </body>

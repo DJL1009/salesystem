@@ -72,7 +72,7 @@ public class CommodityService {
 
     //返回指定用户已购买商品列表（去重）
     public List<Commodity> purchased(SysUser user){
-        List<SysOrder> orders = user.getSysOrders();
+        List<SysOrder> orders = orderService.findByUserId(user.getId());
         List<Commodity> purchased = orders.stream().map(SysOrder::getCommodity).collect(Collectors.toList());
         Set<Commodity> purchasedCom = new HashSet<>(purchased);
         purchased.clear();
