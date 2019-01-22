@@ -58,11 +58,11 @@ public class OrderService {
         return 0;
     }
 
-    public void addOrder(long commodityId,int quantity){
+    //添加订单
+    public void addOrder(Commodity commodity,int quantity){
         SysUser user = (SysUser) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
-        Commodity commodity = commodityRepo.getOne(commodityId);
         SysOrder order = new SysOrder();
         order.setCommodity(commodity);
         order.setSysUser(user);

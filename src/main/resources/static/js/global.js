@@ -48,9 +48,7 @@
 		},
 		setCookie:function(name,value){
 			var cookie = [name, '=', JSON.stringify(value)].join('');
-			console.log("before add================"+cookie);
 			document.cookie = cookie;
-			console.log("after add==============="+document.cookie);
 		},
 		deleteCookie:function(name) {
 			  if (this.getCookie(name))
@@ -62,6 +60,7 @@
     	options = options || {};
         options.type = (options.type || "POST").toUpperCase();
         var xhr = new XMLHttpRequest();
+
         //接收（只要readyState的值变化，就会触发readystatechange事件）
         xhr.onreadystatechange = function(){
         	//readyState=4--完成，已经接收到全部响应数据
@@ -85,6 +84,7 @@
             xhr.open("POST", options.url, true);
             //设置表单提交内容类型
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
             //POST请求头设置csrf token，解决403问题；也可在data域添加_csrf解决该问题
             xhr.setRequestHeader("X-CSRF-TOKEN",token);
             xhr.send(util.serialize(options.data));

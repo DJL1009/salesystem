@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @RestController
@@ -69,7 +70,9 @@ public class RequestController {
     @Secured("ROLE_CUSTOMER")
     public JsonResult buy(HttpServletRequest request){
         JsonResult result;
-        StringBuffer msg = new StringBuffer();
+        HashMap<Long,String> resultData = new HashMap<>();
+
+        StringBuilder msg = new StringBuilder();
         String lineString;
         try {
             BufferedReader reader = request.getReader();
@@ -78,16 +81,34 @@ public class RequestController {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return new JsonResult("error");
         }
+
         JSONArray jsonArray = JSON.parseArray(msg.toString());
-        //事务与减库存===============================================待完成
-        for(int i = 0; i < jsonArray.size(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+        //单商品购买
+        if(jsonArray.size() == 1){
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
             long id = Long.valueOf(jsonObject.getString("id"));
-            int number = Integer.valueOf(jsonObject.getString("number"));
-            orderService.addOrder(id,number);
+            int quantity = Integer.valueOf(jsonObject.getString("number"));
+            try {
+                commodityService.buy(id,quantity);
+            } catch (Exception e) {
+                return new JsonResult(e.getMessage());
+            }
+        }else{
+            //多商品购买
+            for(int i = 0; i < jsonArray.size(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                long id = Long.valueOf(jsonObject.getString("id"));
+                int quantity = Integer.valueOf(jsonObject.getString("number"));
+                try {
+                    commodityService.buy(id,quantity);
+                } catch (Exception e) {
+                    resultData.put(id,e.getMessage());
+                }
+            }
         }
-        result = new JsonResult((Object)"success");
-        return result;
+        return new JsonResult(resultData);
     }
 }

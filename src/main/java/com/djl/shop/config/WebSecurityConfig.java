@@ -14,8 +14,8 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
-@EnableWebMvcSecurity                                   //EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)      //对方法进行权限控制（需要控制权限的方法使用@Secured注解）
+@EnableWebMvcSecurity                                       //EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)          //对方法进行权限控制（需要控制权限的方法使用@Secured注解）
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     UserDetailsService userService(){
@@ -46,11 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/js/**","/images/**","/index","/","/show","/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()               //定义登录方式为form表单登录
-                    .loginPage("/login")   //自定义登录页面
-                    //.successHandler(new ForwardAuthenticationSuccessHandler("/")) //强制登录成功后跳转路径，否则默认会跳转至登录前的页面
+                .formLogin()                               //定义登录方式为form表单登录
+                    .loginPage("/login")                   //自定义登录页面
                     .successHandler(loginSuccessHandler)
-                    //.failureUrl("/error")  //登录失败页面,默认跳转回登录界面
+                    //.failureUrl("/error")                //登录失败页面,默认跳转回登录界面
                     .permitAll()
                 .and()
                 .logout()

@@ -24,7 +24,14 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         if(cookies!=null){
             for(Cookie cookie:cookies){
                 if(cookie.getName().equals("products")){
-                    System.out.println("购物车不为空");
+                    /*
+                    *
+                    * 待扩展：
+                    *   处理cookie
+                    *   将cookie购物车数据持久化到数据库
+                    *
+                    * */
+                    System.out.println("购物车不为空：");
                     System.out.println(cookie.getValue());
                 }
             }

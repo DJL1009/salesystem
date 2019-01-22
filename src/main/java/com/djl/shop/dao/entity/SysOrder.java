@@ -7,27 +7,28 @@ import java.util.Date;
 
 @Entity
 public class SysOrder {
-    @Id     //主键
+    @Id                                                  //主键
     @GeneratedValue(strategy = GenerationType.IDENTITY)  //自增长策略
-    private long id;                //订单ID
+    private long id;                                     //订单ID
 
     //主控方，对象名为被控表mappedby中的值
-    @ManyToOne(optional = false)    //optional=false 表示用户id不能为空。删除订单，不影响用户
+    @ManyToOne(optional = false)               //optional=false 表示用户id不能为空。删除订单，不影响用户
     @JoinColumn(name = "user_id")
-    private SysUser sysUser;        //外键
+    private SysUser sysUser;                   //外键-用户id
 
-    @ManyToOne(optional = false)    //optional=false 表示商品id不能为空。删除订单，不影响商品
+    @ManyToOne(optional = false)               //optional=false 表示商品id不能为空。删除订单，不影响商品
     @JoinColumn(name = "commodity_id")
-    private Commodity commodity;    //外键
+    private Commodity commodity;               //外键-商品id
 
-    private double price;           //商品单价
-    private int quantity;           //商品数量
+    private double price;                      //商品单价
+    private int quantity;                      //商品数量
 
+    //数据库自动添加、更新时间戳
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP)    //Temporal用于映射SQL数据类型
-    private Date time;                   //时间戳
+    @Temporal(TemporalType.TIMESTAMP)          //Temporal用于映射java对象与SQL数据类型
+    private Date time;                         //时间戳
 
-    private boolean isDone;              //订单是否已完成
+    private boolean isDone;                    //待扩展：订单状态，用于区分持久化的购物车数据与已完成订单
 
     public long getId(){ return this.id; }
 

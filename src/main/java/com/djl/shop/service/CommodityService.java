@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +47,27 @@ public class CommodityService {
     @CacheEvict(value = "commodity")
     public void delete(Long id){
         commodityRepo.deleteById(id);
+    }
+
+
+    //购买商品
+    public void buy(Long id,int quantity) throws Exception {
+        Commodity commodity = commodityRepo.getOne(id);
+        if(commodity == null){
+            throw new Exception("商品已下架！");
+        }
+        //检查商品库存
+        int stock = commodity.getQuantity() - commodity.getSelled();
+        if(stock >= quantity){
+            int selled = commodity.getSelled();
+            //增加已售数量
+            commodity.setSelled(selled+quantity);
+            commodityRepo.save(commodity);
+            //添加完成订单
+            orderService.addOrder(commodity,quantity);
+        }else{
+            throw new Exception("商品库存不足！");
+        }
     }
 
     //返回指定用户已购买商品列表（去重）

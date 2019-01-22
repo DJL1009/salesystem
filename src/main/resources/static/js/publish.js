@@ -9,6 +9,7 @@
 	var image = form['image'];
 	var detail = form['detail'];
 	var price = form['price'];
+	var quantity = form['quantity']
 
 	var uploadInput = form['file'];
 	var isSubmiting = false;
@@ -100,7 +101,7 @@
 				}
 			}.bind(this),false);
 
-			[title,summary,image,detail,price].forEach(function(item){
+			[title,summary,image,detail,price,quantity].forEach(function(item){
 				item.addEventListener('input',function(e){
 					item.classList.remove('z-err');
 				}.bind(this),false);
@@ -114,7 +115,8 @@
 				[summary,function(value){return value.length<2 || value.length>140}],
 				[image,function(value){return imageMode === "urlUpload" && value === ''}],
 				[detail,function(value){return value.length<2 || value.length>1000}],
-				[price,function(value){return value === '' || !Number(value)}]
+				[price,function(value){return value === '' || !Number(value)}],
+				[quantity,function(value){return value<0 || !Number(value)}]
 			].forEach(function(item){
 				var value = item[0].value.trim();
 				if(item[1](value)){

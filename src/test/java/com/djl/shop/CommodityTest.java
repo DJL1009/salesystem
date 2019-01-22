@@ -18,12 +18,14 @@ public class CommodityTest {
 
     @Test
     public void findCommodity(){
-        int id = 1;
+        int id = 100;
         Commodity commodity = commodityService.findById(id);
         System.out.println(commodity);
-        commodity.setPrice(1000);
-        commodityService.save(commodity);
-        System.out.println(commodity);
+        System.out.println(commodity == null);
+//        System.out.println(commodity);
+//        commodity.setPrice(1000);
+//        commodityService.save(commodity);
+//        System.out.println(commodity);
     }
 
     @Test

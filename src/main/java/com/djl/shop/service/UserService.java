@@ -30,22 +30,22 @@ public class UserService implements UserDetailsService {
 
     //返回当前登录用户
     public SysUser whoAmI(){
-        SysUser me = (SysUser) SecurityContextHolder.getContext()
+        return  (SysUser) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
-
-        return me;
     }
 
+    //是否已登录？？
     public boolean isLogin(){
         return !SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser");
     }
 
     //返回当前用户角色
-    public List<String> myRoles(){
+    private List<String> myRoles(){
         SysUser me = whoAmI();
-        List<String> roles = me.getRoles().stream().map(SysRole::getName).collect(Collectors.toList());
-        return roles;
+        return  me.getRoles()
+                .stream().map(SysRole::getName)
+                .collect(Collectors.toList());
     }
 
     //当前用户是否为卖家

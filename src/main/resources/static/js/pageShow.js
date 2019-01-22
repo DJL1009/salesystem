@@ -66,6 +66,8 @@
                                 loading.result('购买成功',function(){location.href = '/account';});
                             }else{
                                 alert(json.message);
+                                loading.result('购买失败');
+                                location.reload();
                             }
                         }else{
                             loading.result(message||'购买失败');
@@ -126,6 +128,7 @@
 			}.bind(this)
 		}).show();
 	};
+
 	//out of stock 无库存提示
     function oosMessage() {
         layer.reset({

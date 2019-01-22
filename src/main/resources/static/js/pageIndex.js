@@ -5,6 +5,7 @@
 	}
 	var layer = new Layer();
 	var loading = new Loading();
+
 	var page = {
 		init:function(){
 			plist.addEventListener('click',function(e){
@@ -12,7 +13,6 @@
 				var delId = ele.dataset && ele.dataset.del;
 				if(delId){
 					this.ondel(delId);
-					return;
 				}
 			}.bind(this),false);
 		},
@@ -25,7 +25,7 @@
 					ajax({
 						url:'/api/delete',
 						data:{
-							id:id,
+							id:id
 						},
 						success:function(json){
 							this.delItemNode(id);
@@ -51,9 +51,6 @@
 		}
 	};
 	page.init();
-
-	var purchased = document.getElementsByName("purchased");
-	purchased.forEach(function (item) { item.hidden });
 
 })(window,document);
 

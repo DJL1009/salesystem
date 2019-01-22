@@ -15,6 +15,7 @@ public class SysUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String username;
     private String password;
 
@@ -30,14 +31,23 @@ public class SysUser implements UserDetails {
 
     //getter&setter
     public void setId(long id){ this.id = id; }
+
     public long getId(){ return this.id; }
+
     public void setUsername(String username){ this.username = username; }
+
     public String getUsername(){ return this.username; }
+
     public void setPassword(String password){ this.password = password; }
+
     public String getPassword(){ return this.password; }
+
     public void setRoles(List<SysRole> roles){ this.roles = roles; }
+
     public List<SysRole> getRoles(){ return this.roles; }
+
     public List<SysOrder> getSysOrders() { return this.sysOrders; }
+
     public void setOrders(List<SysOrder> sysOrders) { this.sysOrders = sysOrders; }
 
 
