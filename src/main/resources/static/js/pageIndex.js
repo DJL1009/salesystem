@@ -3,6 +3,7 @@
 	if(!plist){
 		return;
 	}
+
 	var layer = new Layer();
 	var loading = new Loading();
 

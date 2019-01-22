@@ -13,9 +13,9 @@
 <div class="g-doc">
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
         <div class="tab">
-            <ul id="tabUl"> <!-- 新增id，待添加点击事件改变样式 -->
-                <li class="z-sel" ><a href="/">所有商品</a></li>
-                <li><a href="/?type=1" sec:authorize="hasRole('ROLE_CUSTOMER')">未购买的内容</a></li>
+            <ul>
+                <li th:class="${type == 0 ? 'z-sel':'z-notSel'}"><a href="/">所有商品</a></li>
+                <li th:class="${type == 0 ? 'z-notSel':'z-sel'}"><a href="/?type=1" sec:authorize="hasRole('ROLE_CUSTOMER')">未购买商品</a></li>
             </ul>
         </div>
     </div>

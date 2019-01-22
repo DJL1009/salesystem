@@ -35,6 +35,7 @@ public class PageController {
 
     @GetMapping({"/","/index"})
     public String index(Model model){
+        model.addAttribute("type",0);
         List<Commodity> commodities = commodityService.findAll();
         model.addAttribute("commodities",commodities);
         if(user.isLogin()){
@@ -52,6 +53,7 @@ public class PageController {
     @GetMapping(value = {"/","/index"},params = "type")
     @Secured("ROLE_CUSTOMER")
     public String indexCustomer(Model model){
+        model.addAttribute("type",1);
         List<Commodity> purchased = commodityService.purchased(user.whoAmI());
         List<Commodity> notPurchased = commodityService.notPurchased(user.whoAmI());
         model.addAttribute("commodities",notPurchased);

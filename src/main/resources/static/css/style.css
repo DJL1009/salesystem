@@ -112,6 +112,7 @@ select.u-ipt{width:auto;padding:0;line-height:1;}
 .m-tab >.tab >ul >li:first-child>a{margin-left:0;border-top-left-radius:4px;}
 .m-tab >.tab >ul >li:last-child>a{border-top-right-radius:4px;}
 .m-tab >.tab >ul >li.z-sel>a{z-index:2;padding-bottom:1px;margin-bottom:-1px;background:#f3f3f3;}
+.m-tab >.tab >ul >li.z-notSel>a{}
 .m-tab >.more{float:right;margin-left:10px;}
 .m-tab >.more >a,.m-tab >.more >a:hover{color:#333;}
 .m-tab:before{content:"";position:absolute;bottom:0;left:0;right:0;border-bottom:1px solid #d9d9d9;}
