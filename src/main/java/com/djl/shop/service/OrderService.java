@@ -44,6 +44,8 @@ public class OrderService {
         return orderRepo.findBySysUserOrderByTimeDesc(user);
     }
 
+    public List<SysOrder> findByCommodityOrderByTime(Commodity commodity){ return orderRepo.findByCommodityOrderByTimeDesc(commodity); }
+
     public List<SysOrder> findByCommodityId(long id){
         Commodity commodity = commodityRepo.getOne(id);
         return orderRepo.findByCommodity(commodity);

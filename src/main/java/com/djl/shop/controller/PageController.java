@@ -72,6 +72,11 @@ public class PageController {
         if(user.isLogin() && !user.isSeller()){
             model.addAttribute("recentPrice",orderService.recentPrice(user.whoAmI(),commodity));
         }
+        if(user.isLogin() && user.isSeller()){
+            List<SysOrder> orders = orderService.findByCommodityOrderByTime(commodity);
+            model.addAttribute("orders",orders);
+            model.addAttribute("total",orderService.calTotalPrice(orders));
+        }
         return "show";
     }
 

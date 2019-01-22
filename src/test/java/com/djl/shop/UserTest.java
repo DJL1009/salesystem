@@ -29,8 +29,12 @@ public class UserTest {
     @Test
     public void xx(){
         BigDecimal x = BigDecimal.valueOf(0.27);
-        BigDecimal y = BigDecimal.valueOf(6000.09);
+        BigDecimal y = BigDecimal.valueOf(0.09);
         BigDecimal z = x.add(y);
+
+        double s = 0.27;
+        double d = 0.03;
+        System.out.println(s+d);
 
         System.out.println("x+y="+z);
     }

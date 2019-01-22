@@ -9,7 +9,7 @@
 	var image = form['image'];
 	var detail = form['detail'];
 	var price = form['price'];
-	var quantity = form['quantity']
+	var quantity = form['quantity'];
 
 	var uploadInput = form['file'];
 	var isSubmiting = false;
@@ -116,7 +116,7 @@
 				[image,function(value){return imageMode === "urlUpload" && value === ''}],
 				[detail,function(value){return value.length<2 || value.length>1000}],
 				[price,function(value){return value === '' || !Number(value)}],
-				[quantity,function(value){return value<0 || !Number(value)}]
+				[quantity,function(value){return !(value==0) &&( value<0 || value>9999999 || !Number(value))}]
 			].forEach(function(item){
 				var value = item[0].value.trim();
 				if(item[1](value)){

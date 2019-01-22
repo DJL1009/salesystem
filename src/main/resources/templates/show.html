@@ -68,8 +68,39 @@
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
         <h2>详细信息</h2>
     </div>
-    <div class="n-detail" th:text="${commodity.detail}">
+    <div class="n-detail" th:text="${commodity.detail}"></div>
+
+    <div class="g-doc" sec:authorize="hasRole('ROLE_SELLER')">
+        <div class="m-tab m-tab-fw m-tab-simple f-cb">
+            <h2>销售记录</h2>
+        </div>
+
+        <div class="n-result" th:if="${#lists.isEmpty(orders)}">
+            <h3>再等等，说不定一会儿就被抢购一空呢？</h3>
+        </div>
+
+        <table class="m-table m-table-row n-table g-b3" th:if="${not #lists.isEmpty(orders)}">
+            <thead>
+            <tr><th></th><th>买家</th><th>购买数量</th><th>交易时间</th><th>成交单价</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="order:${orders}">
+                <td><img th:src="${order.commodity.image}" alt=""></td>
+                <td><span class="v-time" th:text="${order.sysUser.username}"></span></td>
+                <td><span class="v-num" th:text="${order.quantity}"></span></td>
+                <td><span class="v-time" th:text="${order.time}"></span></td>
+                <td><span class="v-unit">¥</span><span class="value" th:text="${order.price}"></span></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4"><div class="total">总计：</div></td>
+                <td><span class="v-unit">¥</span><span class="value" th:text="${total}"></span></td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
+
 </div>
 <div th:replace="common/footer :: foot"></div>
 <script th:src="@{js/global.js}" type="text/javascript"></script>
