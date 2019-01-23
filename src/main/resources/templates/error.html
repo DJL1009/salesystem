@@ -7,9 +7,12 @@
 </head>
 <body>
 <div th:replace="common/header :: head"></div>
-
-    <h3>登录失败，请检查用户名及密码。。。。 <a href="/login">【返回】</a> </h3>
-
+    <div class="g-doc">
+        <div class="n-result">
+            <h3>Smothing Error</h3>
+            <p><a href="javascript:history.back()" >[返回页面]</a><a href="/">[首页]</a></p>
+        </div>
+    </div>
 <div th:replace="common/footer :: foot"></div>
 <script th:src="@{js/global.js}" type="text/javascript"></script>
 </body>

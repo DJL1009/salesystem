@@ -19,6 +19,11 @@
             </ul>
         </div>
     </div>
+
+    <div class="n-result" th:if="${#lists.isEmpty(commodities)}">
+        <h3>都怪小店商品太少，你居然都买过了。。。</h3>
+    </div>
+
     <div th:if="${not #lists.isEmpty(commodities)}">
         <div class="n-plist">
             <ul class="f-cb" id="plist">
