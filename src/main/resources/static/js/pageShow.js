@@ -95,7 +95,8 @@
 		}
 		var ele = e.target;
 		var id = ele && ele.dataset.id;
-		var title = ele && ele.dataset.title;
+		//编码，解决safari浏览器cookie无法添加中文问题
+		var title = encodeURIComponent(ele && ele.dataset.title);
 		var price = ele && ele.dataset.price;
         var stock = ele && ele.dataset.stock;
         if(stock == 0){
@@ -135,7 +136,7 @@
             content:'该商品暂时缺货！！',
             onconfirm:function(){
                 layer.hide();
-                location.reload();
+                location.reload();  //刷新当前页面
             }.bind(this)
         }).show();
     }

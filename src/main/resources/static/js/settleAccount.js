@@ -20,7 +20,7 @@
         for(var i = 0; i < products.length; i++){
             str = str +
                 "<tr id=tr-"+i+">" +
-                "<td>" + products[i].title  + "</td>" +
+                "<td>" + decodeURIComponent(products[i].title)  + "</td>" +
                 "<td>" +
                 "<span class=\"lessNum\">"+ "-" + "</span>" +
                 "<span class=\"totalNum\" id=\"allNum\">" + products[i].num + "</span>" +
