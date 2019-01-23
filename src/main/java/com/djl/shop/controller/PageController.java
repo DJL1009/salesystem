@@ -129,7 +129,7 @@ public class PageController {
     @GetMapping("/account")
     @Secured("ROLE_CUSTOMER")
     public String account(Model model){
-        List<SysOrder> orders = orderService.findByUserOrderByTime(user.whoAmI());//user.whoAmI().getSysOrders()
+        List<SysOrder> orders = orderService.findByUserOrderByTime(user.whoAmI());
         model.addAttribute("orders",orders);
         model.addAttribute("total",orderService.calTotalPrice(orders));
         return "account";

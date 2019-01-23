@@ -12,7 +12,7 @@
 	var quantity = form['quantity'];
 
 	var uploadInput = form['file'];
-	var isSubmiting = false;
+	var isSubmiting = true;
 	var imgpre = util.get('imgpre');
 	var loading = new Loading();
 	var imageUrl;
@@ -79,8 +79,9 @@
                             var o = JSON.parse(xhr.responseText);
                             if(o.state === 0){
                                 imageUrl = o && o.data;
-                                image.value = imageUrl; //重置表单数据
-                                imgpre.src = imageUrl;  //更新预览图片路径并显示
+                                image.value = imageUrl;              //重置表单数据
+                                imgpre.src = imageUrl;               //更新预览图片路径并显示
+								uploadInput.classList.remove('z-err');
                                 alert("文件上传成功");
 							}else{
                             	alert('Error:'+o.message);
@@ -88,13 +89,15 @@
                         } else {
                             alert('An error occurred!');
                         }
+                        isSubmiting = true;
                     };
                     //发送请求
+					isSubmiting = false;
                     xhr.send(imgForm);
 				}
 			});
 			form.addEventListener('submit',function(e){
-				if(!isSubmiting && this.check()){
+				if(isSubmiting && this.check()){
 					price.value = Number(price.value);
 					isSubmiting = true;
 					form.submit();
@@ -116,7 +119,7 @@
 				[image,function(value){return imageMode === "urlUpload" && value === ''}],
 				[detail,function(value){return value.length<2 || value.length>1000}],
 				[price,function(value){return value === '' || !Number(value)}],
-				[quantity,function(value){return !(value==0) &&( value<0 || value>9999999 || !Number(value))}]
+				[quantity,function(value){return !(value==0) &&( value<0 || value>9999999 || !Number(value)) || value===''}]
 			].forEach(function(item){
 				var value = item[0].value.trim();
 				if(item[1](value)){

@@ -46,10 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/js/**","/images/**","/img/**","/index","/","/show","/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()                               //定义登录方式为form表单登录
-                    .loginPage("/login")                   //自定义登录页面
+                .formLogin()                                                 //定义登录方式为form表单登录
+                    .loginPage("/login")                                     //自定义登录页面
                     .successHandler(loginSuccessHandler)
-                    //.failureUrl("/error")                //登录失败页面,默认跳转回登录界面
+                    //.defaultSuccessUrl("/",true)                           //登录成功后强制跳转首页
+                    //.failureUrl("/error")                                  //登录失败页面,默认跳转回登录界面
                     .permitAll()
                 .and()
                 .logout()

@@ -17,7 +17,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication)
-            throws IOException,ServletException{
+            throws IOException{
         SysUser user = (SysUser)authentication.getPrincipal();
         System.out.println("用户"+user.getUsername()+"登录成功");
         Cookie[] cookies = request.getCookies();
@@ -31,11 +31,11 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
                     *   将cookie购物车数据持久化到数据库
                     *
                     * */
-                    System.out.println("购物车不为空：");
                     System.out.println(cookie.getValue());
                 }
             }
         }
-        super.onAuthenticationSuccess(request,response,authentication);
+        //跳转首页
+        this.getRedirectStrategy().sendRedirect(request,response,"/");
     }
 }

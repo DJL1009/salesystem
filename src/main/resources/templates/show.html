@@ -70,6 +70,7 @@
     </div>
     <div class="n-detail" th:text="${commodity.detail}"></div>
 
+    <!-- 卖家显示：销售记录 -->
     <div class="g-doc" sec:authorize="hasRole('ROLE_SELLER')">
         <div class="m-tab m-tab-fw m-tab-simple f-cb">
             <h2>销售记录</h2>
