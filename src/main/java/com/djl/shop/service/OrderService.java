@@ -51,11 +51,13 @@ public class OrderService {
         return orderRepo.findByCommodity(commodity);
     }
 
-    public List<SysOrder> findByUandC(SysUser user,Commodity commodity){
-        return orderRepo.findBySysUserAndCommodity(user,commodity);
-    }
 
-    //x用户购买y商品的最近价格
+    /**
+     * 用户user购买指定commodity最近的价格
+     * @param user
+     * @param commodity
+     * @return
+     */
     public double recentPrice(SysUser user,Commodity commodity){
         List<SysOrder> orders = orderRepo.findBySysUserAndCommodity(user,commodity);
         if(orders.size()!=0){
@@ -64,7 +66,12 @@ public class OrderService {
         return 0;
     }
 
-    //添加订单
+
+    /**
+     * 添加订单
+     * @param commodity
+     * @param quantity
+     */
     public void addOrder(Commodity commodity,int quantity){
         SysUser user = (SysUser) SecurityContextHolder.getContext()
                 .getAuthentication()
@@ -78,8 +85,12 @@ public class OrderService {
         orderRepo.save(order);
     }
 
+    /**
+     * 计算总金额
+     * @param orders
+     * @return
+     */
     public BigDecimal calTotalPrice(List<SysOrder> orders){
-
         //使用double或float计算结果会出现一定的误差。因此使用BigDecimal进行精确计算=====> https://www.cnblogs.com/LeoBoy/p/6056394.html
         BigDecimal total = BigDecimal.ZERO;
         if(orders.size()==0)
@@ -91,4 +102,17 @@ public class OrderService {
         }
         return total;
     }
+
+    //添加订单测试，直接指定默认买家
+    public void addOrderTest(Commodity commodity,int quantity){
+        SysUser user = userRepo.getOne(2L);
+        SysOrder order = new SysOrder();
+        order.setCommodity(commodity);
+        order.setSysUser(user);
+        order.setQuantity(quantity);
+        order.setPrice(commodity.getPrice());
+        order.setDone(true);
+        orderRepo.save(order);
+    }
+
 }

@@ -10,16 +10,19 @@ import java.util.List;
 @Entity
 public class Commodity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;          //不能使用封装类型
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    //自增长策略
+    private long id;                                       //不能使用封装类型
+
+//    @Version
+//    private long version;
 
     private String title;
     private double price;
     private String image;
     private String summary;
     private String detail;
-    private int quantity;    //总量
-    private int selled;      //已售数量
+    private int quantity;                                 //总量
+    private int selled;                                   //已售数量
 
     //商品相对于订单来说是被控方，被控方需要写mappedBy，其值为主控方中引用的外键对象的名称
     @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE},mappedBy = "commodity")
@@ -30,6 +33,10 @@ public class Commodity {
     public void setId(long id){
         this.id = id;
     }
+
+//    public long getVersion() { return version; }
+//
+//    public void setVersion(long version) { this.version = version; }
 
     public String getTitle(){ return this.title; }
 
@@ -96,6 +103,7 @@ public class Commodity {
     public String toString(){
         return this.getId()+"---"+this.getTitle()+":  ¥"+this.getPrice();
     }
+
 
 
 }

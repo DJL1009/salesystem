@@ -36,7 +36,7 @@
                             <span class="v-value" th:text="${commodity.price}"></span>
                             <span style="float: right" sec:authorize="hasRole('ROLE_SELLER')" th:text="'【已售】'+${commodity.selled}+'/'+${commodity.quantity}"></span>
                         </div>
-                        <span class="had" sec:authorize="hasRole('ROLE_CUSTOMER')" th:if="${purchased.contains(commodity)}"><b>已购买</b></span>
+                        <span class="had" sec:authorize="hasRole('ROLE_CUSTOMER')" th:if="${(type!=1) && (purchased.contains(commodity))}"><b>已购买</b></span>
                         <span class="had" sec:authorize="hasRole('ROLE_SELLER')" th:if="${commodity.quantity - commodity.selled == 0}"><b>已售罄</b></span>
                     </a>
                     <span class="u-btn u-btn-normal u-btn-xs del" th:data-del="${commodity.id}" sec:authorize="hasRole('ROLE_SELLER')" th:if="${commodity.selled == 0}">删除</span>

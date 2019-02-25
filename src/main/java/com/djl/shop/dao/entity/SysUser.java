@@ -29,7 +29,6 @@ public class SysUser implements UserDetails {
     @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.REMOVE},mappedBy = "sysUser")
     private List<SysOrder> sysOrders;
 
-    //getter&setter
     public void setId(long id){ this.id = id; }
 
     public long getId(){ return this.id; }

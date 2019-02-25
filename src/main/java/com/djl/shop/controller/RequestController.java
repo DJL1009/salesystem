@@ -35,6 +35,11 @@ public class RequestController {
     @Autowired
     OrderService orderService;
 
+    /**
+     * 上传商品图片
+     * @param img
+     * @return
+     */
     @PostMapping("/upload")
     @Secured("ROLE_SELLER")
     public JsonResult upload(@RequestParam("file") MultipartFile img){
@@ -51,6 +56,11 @@ public class RequestController {
         return result;
     }
 
+    /**
+     * 删除商品
+     * @param request
+     * @return
+     */
     @PostMapping("/delete")
     @Secured("ROLE_SELLER")
     public JsonResult delete(HttpServletRequest request){
@@ -65,6 +75,11 @@ public class RequestController {
         return result;
     }
 
+    /**
+     * 购物结算
+     * @param request
+     * @return
+     */
     @PostMapping("/buy")
     @Secured("ROLE_CUSTOMER")
     public JsonResult buy(HttpServletRequest request){

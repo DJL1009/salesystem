@@ -48,9 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()                                                 //定义登录方式为form表单登录
                     .loginPage("/login")                                     //自定义登录页面
-                    .successHandler(loginSuccessHandler)
-                    //.defaultSuccessUrl("/",true)                           //登录成功后强制跳转首页
-                    //.failureUrl("/error")                                  //登录失败页面,默认跳转回登录界面
+                    .successHandler(loginSuccessHandler)                     //登录成功handler。默认登录失败重定向到登录页面
                     .permitAll()
                 .and()
                 .logout()

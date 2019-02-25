@@ -1,4 +1,4 @@
-## 购物系统
+## 购物系统--网易大作业
 
 ### 系统实现技术栈  
 > Spring Boot + Spring Security + Thymeleaf + Mysql  

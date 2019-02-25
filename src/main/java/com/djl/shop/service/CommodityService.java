@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -50,7 +49,12 @@ public class CommodityService {
     }
 
 
-    //购买商品
+    /**
+     * 购买商品：增加已售数量，添加订单
+     * @param id
+     * @param quantity
+     * @throws Exception
+     */
     public void buy(Long id,int quantity) throws Exception {
         Commodity commodity = commodityRepo.getOne(id);
         if(commodity == null){
@@ -70,7 +74,12 @@ public class CommodityService {
         }
     }
 
-    //返回指定用户已购买商品列表（去重）
+
+    /**
+     * 查询指定用户已购买商品集合
+     * @param user
+     * @return
+     */
     public List<Commodity> purchased(SysUser user){
         List<SysOrder> orders = orderService.findByUserId(user.getId());
         List<Commodity> purchased = orders.stream().map(SysOrder::getCommodity).collect(Collectors.toList());
@@ -87,11 +96,48 @@ public class CommodityService {
         return commodities;
     }
 
-    //已售商品列表
+
+    /**
+     * 查询已售商品集合
+     * @return
+     */
     public List<Commodity> selled(){
         List<SysOrder> orders = orderService.findAll();
         List<Commodity> selled = orders.stream().map(SysOrder::getCommodity).collect(Collectors.toList());
         return selled;
+    }
+
+
+    //购买商品测试
+    public void buyTest(Long id,int quantity) throws Exception {
+        Commodity commodity = commodityRepo.getOne(id);
+
+        if(commodity == null){
+            throw new Exception("商品已下架！");
+        }
+        //检查商品库存
+        int stock = commodity.getQuantity() - commodity.getSelled();
+        if(stock >= quantity){
+            int selled = commodity.getSelled();
+            //增加已售数量
+            commodity.setSelled(selled+quantity);
+            System.out.println("当前已售出==============>"+commodity.getSelled());
+            commodityRepo.save(commodity);
+            //添加完成订单
+            orderService.addOrderTest(commodity,quantity);
+        }else{
+            throw new Exception("商品库存不足！");
+        }
+    }
+
+
+    /**
+     * 更新已售数量
+     * @param id
+     * @param quantity
+     */
+    public void updateSelled(long id,int quantity){
+        int result = commodityRepo.updateSelled(id,quantity);
     }
 
 }

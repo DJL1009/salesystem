@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import javax.management.relation.Role;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,28 +27,40 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    //返回当前登录用户
+    /**
+     * 返回当前用户
+     * @return SysUser
+     */
     public SysUser whoAmI(){
         return  (SysUser) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();
     }
 
-    //是否已登录？？
+    /**
+     * 判断是否已登录
+     * @return boolean
+     */
     public boolean isLogin(){
         return !SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser");
     }
 
-    //返回当前用户角色
+    /**
+     * 判断当前用户是否为买家？
+     * @return boolean
+     */
+    public boolean isSeller(){
+        return myRoles().contains("ROLE_SELLER");
+    }
+
+    /**
+     * 返回当前用户角色名称列表
+     * @return List<String>
+     */
     private List<String> myRoles(){
         SysUser me = whoAmI();
         return  me.getRoles()
                 .stream().map(SysRole::getName)
                 .collect(Collectors.toList());
-    }
-
-    //当前用户是否为卖家
-    public boolean isSeller(){
-        return myRoles().contains("ROLE_SELLER");
     }
 }
