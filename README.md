@@ -1,4 +1,12 @@
 ## 购物系统--网易大作业
+***  
+### 线上访问
+> 访问链接： <http://djlps.axstu.com:9999/>  
+> 用户及密码：  
+> 卖家： seller 密码：relles  
+> 买家： buyer  密码：reyub  
+
+***
 
 ### 系统实现技术栈  
 > Spring Boot + Spring Security + Thymeleaf + Mysql  
